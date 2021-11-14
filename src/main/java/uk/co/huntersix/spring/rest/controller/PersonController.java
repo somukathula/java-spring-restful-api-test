@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import uk.co.huntersix.spring.rest.model.Person;
 import uk.co.huntersix.spring.rest.referencedata.PersonDataService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,24 +21,24 @@ public class PersonController {
     }
 
     @GetMapping(value = "/person/{lastName}/{firstName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Person findPerson(@PathVariable(value="lastName") String lastName,
-                                         @PathVariable(value="firstName") String firstName) {
+    public Person findPerson(@PathVariable(value = "lastName") String lastName,
+                             @PathVariable(value = "firstName") String firstName) {
 
         return personDataService.findPerson(lastName, firstName);
     }
 
     @GetMapping(value = "/person/{lastName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Person> findPersons(@PathVariable(value="lastName") String lastName) {
+    public List<Person> findPersons(@PathVariable(value = "lastName") String lastName) {
 
-        List<Person> personList = new ArrayList<>();
         return personDataService.findPersons(lastName);
 
     }
-    @PostMapping(value = "/person/{lastName}/{firstName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> addPerson(@PathVariable(value="lastName") String lastName,
-                         @PathVariable(value="firstName") String firstName) {
 
-         return personDataService.addPerson(lastName, firstName);
+    @PostMapping(value = "/person/{lastName}/{firstName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> addPerson(@PathVariable(value = "lastName") String lastName,
+                                            @PathVariable(value = "firstName") String firstName) {
+
+        return personDataService.addPerson(lastName, firstName);
     }
 
 }

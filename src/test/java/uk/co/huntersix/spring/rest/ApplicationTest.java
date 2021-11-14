@@ -8,7 +8,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ApplicationTest {
-    @Test
+    @Test(expected = Test.None.class /* no exception expected */)
     public void contextLoads() throws Exception {
+
     }
+
+
 }

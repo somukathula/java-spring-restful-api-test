@@ -3,6 +3,7 @@ package uk.co.huntersix.spring.rest.model;
 import org.junit.Test;
 
 import static junit.framework.TestCase.*;
+import static org.junit.Assert.assertNotEquals;
 
 public class PersonTest {
     @Test
@@ -16,8 +17,7 @@ public class PersonTest {
     public void idsShouldBeDifferent() {
         Person classUnderTest1 = new Person("John", "Smith");
         Person classUnderTest2 = new Person("Harry", "Brown");
-
-        assertFalse(classUnderTest1.getId().equals(classUnderTest2.getId()));
+        assertNotEquals(classUnderTest1.getId(), classUnderTest2.getId());
     }
 
 

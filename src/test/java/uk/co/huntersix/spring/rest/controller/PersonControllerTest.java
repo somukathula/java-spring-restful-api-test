@@ -37,16 +37,16 @@ public class PersonControllerTest {
     public void shouldReturnPersonFromService() throws Exception {
         when(personDataService.findPerson(any(), any())).thenReturn(new Person("Mary", "Smith"));
         this.mockMvc.perform(get("/person/smith/mary"))
-            .andDo(print())
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("id").exists())
-            .andExpect(jsonPath("firstName").value("Mary"))
-            .andExpect(jsonPath("lastName").value("Smith"));
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("id").exists())
+                .andExpect(jsonPath("firstName").value("Mary"))
+                .andExpect(jsonPath("lastName").value("Smith"));
 
     }
 
     @Test
-    public void requestedPersonDoesNotExist() throws  Exception{
+    public void requestedPersonDoesNotExist() throws Exception {
         when(personDataService.findPerson(any(), any())).thenReturn(new Person("NO_DATA_FOUND", "NO_DATA_FOUND"));
         this.mockMvc.perform(get("/person/smith/mar"))
                 .andDo(print())
@@ -56,20 +56,20 @@ public class PersonControllerTest {
     }
 
     @Test
-    public void  getListOfAllPeopleWithSurname() throws Exception {
+    public void getListOfAllPeopleWithSurname() throws Exception {
         when(personDataService.findPersons(any())).thenReturn(Arrays.asList(
                 new Person("Mary", "Smith"),
-                 new Person("Gold", "Smith")));
+                new Person("Gold", "Smith")));
         this.mockMvc.perform(get("/person/smith"))
-            .andDo(print())
-            .andExpect(status().isOk())
-            .andExpect(content().json("[{}, {}]"));
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().json("[{}, {}]"));
     }
 
     @Test
-    public void  addPerson() throws Exception {
-      when(personDataService.addPerson(any(), any())).thenAnswer(x -> ResponseEntity.ok("Person Added Successfully"));
-      this.mockMvc.perform(post("/person/smith/mary"))
+    public void addPerson() throws Exception {
+        when(personDataService.addPerson(any(), any())).thenAnswer(x -> ResponseEntity.ok("Person Added Successfully"));
+        this.mockMvc.perform(post("/person/smith/mary"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string("Person Added Successfully"));

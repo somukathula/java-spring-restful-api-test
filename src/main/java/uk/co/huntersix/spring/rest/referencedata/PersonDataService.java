@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class PersonDataService {
-    public static final List<Person> PERSON_DATA = Arrays.asList(
+    protected static final List<Person> PERSON_DATA = Arrays.asList(
             new Person("Mary", "Smith"),
             new Person("Brian", "Archer"),
             new Person("Collin", "Brown"),
@@ -25,20 +25,20 @@ public class PersonDataService {
                         && p.getLastName().equalsIgnoreCase(lastName))
                 .collect(Collectors.toList());
 
-        if(!personList.isEmpty())
-               return personList.get(0);
+        if (!personList.isEmpty())
+            return personList.get(0);
 
         else
-                  return new Person("NO_DATA_FOUND", "NO_DATA_FOUND");
+            return new Person("NO_DATA_FOUND", "NO_DATA_FOUND");
 
 
     }
 
     public List<Person> findPersons(String lastName) {
-        List<Person> personList = PERSON_DATA.stream()
-                .filter(p ->  p.getLastName().equalsIgnoreCase(lastName))
+
+        return PERSON_DATA.stream()
+                .filter(p -> p.getLastName().equalsIgnoreCase(lastName))
                 .collect(Collectors.toList());
-        return personList;
     }
 
     public ResponseEntity<String> addPerson(String lastName, String firstName) {
@@ -46,11 +46,10 @@ public class PersonDataService {
                 .filter(p -> p.getFirstName().equalsIgnoreCase(firstName)
                         && p.getLastName().equalsIgnoreCase(lastName))
                 .collect(Collectors.toList());
-        if(personList.isEmpty()){
+        if (personList.isEmpty()) {
             personList.add(new Person(firstName, lastName));
             return new ResponseEntity<>("Person Added Successfully", HttpStatus.OK);
-        }
-        else{
+        } else {
             return new ResponseEntity<>("Person already exists", HttpStatus.FORBIDDEN);
         }
 
